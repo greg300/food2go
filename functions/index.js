@@ -26,9 +26,13 @@ app.post('/api/create/orders', (req, res) => {
     console.log(req.body);
     (async () => {
         try {
-            db.ref('employee/' + req.body['id']).set( {
-                id: req.body['id'],
-                name: req.body['item']
+            db.ref('orders/' + req.body['order_id']).set( {
+                //order_id: req.body['order_id'],
+                customer_id: req.body['customer_id'],
+                status: req.body['status'],
+                items: req.body['items'],
+                price: req.body['price'],
+                coupons: req.body['coupons'],
             });
             return res.status(200).send();
         } catch (error) {
