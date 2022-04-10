@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "7faa85ab-8211-494d-b677-6e102357f3db",
+		"name": "Food2Go",
+		"description": "Test requests for Software Engineering of Web Applications – Team 4's project, Food2Go.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Order (Localhost)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n\t\"item\": \"second item\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5001/food2go-56aac/us-central1/app/api/create/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"food2go-56aac",
+						"us-central1",
+						"app",
+						"api",
+						"create",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee (Localhost)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employeeid\": \"EMP-1\",\n\t\"password\": \"Password123\",\n\t\"email\": \"test123@test.com\",\n\t\"name\": \"Test Employee\",\n\t\"phone\": \"000-867-5309\",\n\t\"position\": \"Manager\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/{{project-id}}/{{zone}}/app/api/create/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{project-id}}",
+						"{{zone}}",
+						"app",
+						"api",
+						"create",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6db9be25-d328-4d16-a024-eb7e3497351b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "76d61db6-bc65-415d-a3a1-9d5ec6a45895",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ba641261-42fe-41e1-a0ef-8ad461bca0d8",
+			"key": "project-id",
+			"value": "food2go-56aac",
+			"type": "string"
+		},
+		{
+			"id": "95208692-1a96-4de6-8784-46ea26461085",
+			"key": "port",
+			"value": "5001",
+			"type": "string"
+		},
+		{
+			"id": "076e397d-0a30-427d-8ee9-1ab8e439cdd4",
+			"key": "zone",
+			"value": "us-central1",
+			"type": "string"
+		}
+	]
+}
