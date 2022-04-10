@@ -15,12 +15,14 @@ admin.initializeApp({
 const db = admin.database();
 
 // --- APIs ---
+
+// --- TESTING ---
 // Test server status.
 app.get('/hello-world', (req, res) => {
   return res.status(200).send('Hello World!');
 });
 
-
+// --- CREATE ---
 // Create new Order.
 app.post('/api/create/orders', (req, res) => {
     console.log(req.body);
@@ -56,6 +58,24 @@ app.post('/api/create/employees', (req, res) => {
                 phone: req.body['phone'],
                 position: req.body['position']
             });
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
+
+// --- READ ---
+// Read all Orders.
+app.get('/api/read/orders', (req, res) => {
+    console.log(req.body);
+    (async () => {
+        try {
+            db.ref('orders/').once('value').then(function(snapshot) {
+                console.log(snapshot.val())
+            })
             return res.status(200).send();
         } catch (error) {
             console.log(error);
