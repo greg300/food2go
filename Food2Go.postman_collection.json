@@ -77,42 +77,29 @@
 			"response": []
 		},
 		{
-			"name": "Create Customer (Localhost)",
+			"name": "Read Orders (Localhost)",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"testCustomer\",\n\t\"password\": \"123Password\",\n\t\"email\": \"first_customer@test.com\",\n\t\"name\": \"Test Customer\",\n\t\"phone\": \"832-265-1258\",\n\}"
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://localhost:{{port}}/{{project-id}}/{{zone}}/app/api/create/employees",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"{{project-id}}",
-						"{{zone}}",
-						"app",
-						"api",
-						"create",
-						"employees"
-					]
+					"raw": ""
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Read Orders (Localhost)",
+			"name": "Read Orders by Customer (Localhost)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Food Items (Localhost)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -147,19 +134,19 @@
 	],
 	"variable": [
 		{
-			"id": "735bdb47-b6b2-436d-8b31-202da8361e53",
+			"id": "f1e7a1b4-a6fd-45e7-b66f-14b4d4d9b198",
 			"key": "project-id",
 			"value": "food2go-56aac",
 			"type": "string"
 		},
 		{
-			"id": "e06a907e-f9d4-4fbd-95fd-8838bc6a89c2",
+			"id": "f8071b1b-0dd2-43f3-8220-d9182d0dc035",
 			"key": "port",
 			"value": "5001",
 			"type": "string"
 		},
 		{
-			"id": "4e8aac9d-12ca-481a-8d9d-073d3a60e8f1",
+			"id": "dd522a0c-3aca-482d-bc86-00b8d2910c12",
 			"key": "zone",
 			"value": "us-central1",
 			"type": "string"
