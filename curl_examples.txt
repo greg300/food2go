@@ -1,0 +1,12 @@
+curl -d "employee_id=testEmployee2&password=1234Password*&email=second_employeee@test.com&name=Test Employee2 2&phone=481-633-2948&position=Cashier" -X POST http://localhost:5001/food2go-56aac/us-central1/app/api/create/employees
+
+curl -X DELETE http://localhost:5001/food2go-56aac/us-central1/app/api/delete/employees/testEmployee2
+
+curl -d "username=testCustomer2&password=1234Password*&email=second_customer@test.com&name=Test Customer 2&phone=481-673-2948" -X POST http://localhost:5001/food2go-56aac/us-central1/app/api/create/customers
+
+curl -X DELETE http://localhost:5001/food2go-56aac/us-central1/app/api/delete/customers/testCustomer2
+
+curl http://localhost:5001/food2go-56aac/us-central1/app/api/read/orders
+
+curl -d "password=testing&email=testing@testing.com" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer
+
