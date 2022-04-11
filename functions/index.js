@@ -44,11 +44,6 @@ app.post('/api/create/orders', (req, res) => {
       })();
   });
 
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> d460e7280fe84512225f2905b0faca4ac8835ad5
 // Create new Employee.
 app.post('/api/create/employees', (req, res) => {
     console.log(req.body);
@@ -89,7 +84,6 @@ app.post('/api/create/customers', (req, res) => {
       })();
   });
 
-<<<<<<< HEAD
 // Create new Food item.
 app.post('/api/create/foods', (req, res) => {
   console.log(req.body);
@@ -107,9 +101,6 @@ app.post('/api/create/foods', (req, res) => {
       }
     })();
 });
-=======
-
->>>>>>> d460e7280fe84512225f2905b0faca4ac8835ad5
 
 
 // --- READ ---
@@ -129,7 +120,6 @@ app.get('/api/read/orders', (req, res) => {
       })();
   });
 
-<<<<<<< HEAD
 // Read all Food items.
 app.get('/api/read/foods', (req, res) => {
   console.log(req.body);
@@ -145,9 +135,6 @@ app.get('/api/read/foods', (req, res) => {
       }
     })();
 });
-=======
-
->>>>>>> d460e7280fe84512225f2905b0faca4ac8835ad5
 
 // --- UPDATE ---
 // Update Employee.
@@ -214,13 +201,10 @@ app.patch('/api/update/customers/:username', (req, res) => {
       })();
   });
 
-<<<<<<< HEAD
 // Add Food Item into cart.
 
 
 // Remove Food Item from cart.
-=======
->>>>>>> d460e7280fe84512225f2905b0faca4ac8835ad5
 
 
 
