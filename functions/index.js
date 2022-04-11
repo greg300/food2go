@@ -104,12 +104,40 @@ app.post('/api/create/foods', (req, res) => {
 
 
 // --- READ ---
-// Read all Orders.
-app.get('/api/read/orders', (req, res) => {
+// Read all Orders (optionally supply a Customer ID to filter by a given Customer).
+app.get('/api/read/orders/', (req, res) => {
+    var customer_id = req.query['customer_id'];
+    console.log(customer_id);
+    (async () => {
+        try {
+            var result = [];
+            db.ref('orders/').once('value').then(function(snapshot) {
+                if (customer_id == undefined) {  // If no Customer was supplied to filter results.
+                    console.log(snapshot.val());
+                    return res.status(200).send(snapshot.val());
+                }
+                snapshot.forEach(function(orderSnapshot) {
+                    var order = orderSnapshot.val();
+                    if (order.customer_id === customer_id) {
+                        result.push(order);
+                    }
+                });
+                console.log(result);
+                return res.status(200).send(result);
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
+// Read all Food Items.
+app.get('/api/read/foods', (req, res) => {
     console.log(req.body);
     (async () => {
         try {
-            db.ref('orders/').once('value').then(function(snapshot) {
+            db.ref('foods/').once('value').then(function(snapshot) {
                 console.log(snapshot.val());
                 return res.status(200).send(snapshot.val());
             })
@@ -120,21 +148,6 @@ app.get('/api/read/orders', (req, res) => {
       })();
   });
 
-// Read all Food items.
-app.get('/api/read/foods', (req, res) => {
-  console.log(req.body);
-  (async () => {
-      try {
-          db.ref('foods/').once('value').then(function(snapshot) {
-              console.log(snapshot.val())
-          })
-          return res.status(200).send();
-      } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
-      }
-    })();
-});
 
 // --- UPDATE ---
 // Update Employee.
