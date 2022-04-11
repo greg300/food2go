@@ -95,9 +95,9 @@ app.get('/api/read/orders', (req, res) => {
     (async () => {
         try {
             db.ref('orders/').once('value').then(function(snapshot) {
-                console.log(snapshot.val())
+                console.log(snapshot.val());
+                return res.status(200).send(snapshot.val());
             })
-            return res.status(200).send();
         } catch (error) {
             console.log(error);
             return res.status(500).send(error);
