@@ -92,7 +92,9 @@ app.post('/api/create/foods', (req, res) => {
           db.ref('foods/' + req.body['food_item_id']).set( {
               name: req.body['name'],
               description: req.body['description'],
-              price: req.body['price']
+              price: req.body['price'],
+              availability: true,
+              price_knock: 0
           });
           return res.status(200).send();
       } catch (error) {
@@ -126,9 +128,9 @@ app.get('/api/read/foods', (req, res) => {
   (async () => {
       try {
           db.ref('foods/').once('value').then(function(snapshot) {
-              console.log(snapshot.val())
+              console.log(snapshot.val());
+              return res.status(200).send();
           })
-          return res.status(200).send();
       } catch (error) {
           console.log(error);
           return res.status(500).send(error);
@@ -201,8 +203,7 @@ app.patch('/api/update/customers/:username', (req, res) => {
       })();
   });
 
-// Add Food Item into cart.
-
+// Add Food Item into Cart.
 
 // Remove Food Item from cart.
 
@@ -231,6 +232,21 @@ app.delete('/api/delete/customers/:username', (req, res) => {
     (async () => {
         try {
             db.ref('customers/' + username).remove();
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
+  // Delete Food item.
+app.delete('/api/delete/foods/:food_item_id', (req, res) => {
+    var food_item_id = req.param("food_item_id");
+    console.log(food_item_id);
+    (async () => {
+        try {
+            db.ref('foods/' + food_item_id).remove();
             return res.status(200).send();
         } catch (error) {
             console.log(error);

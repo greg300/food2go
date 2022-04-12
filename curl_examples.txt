@@ -10,4 +10,8 @@ curl http://localhost:5001/food2go-56aac/us-central1/app/api/read/orders
 
 curl -d "password=testing&email=testing@testing.com" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer
 
-curl -d "food_item_id=testFood01&name=Test Food 02&description=This is Food item 02&price=11.1" -X POST http://localhost:5001/food2go-56aac/us-central1/app/api/create/food
+curl http://localhost:5001/food2go-56aac/us-central1/app/api/read/foods
+
+curl -d "food_item_id=testFoodItem02&name=Food02&description=Food Description 2&price=11.1" -X POST http://localhost:5001/food2go-56aac/us-central1/app/api/create/foods
+
+curl -X DELETE http://localhost:5001/food2go-56aac/us-central1/app/api/delete/foods/testFoodItem02
