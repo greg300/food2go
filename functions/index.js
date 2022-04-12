@@ -150,7 +150,7 @@ app.get('/api/read/foods', (req, res) => {
       })();
   });
 
-<<<<<<< HEAD
+
 // Read all Food items.
 app.get('/api/read/foods', (req, res) => {
   console.log(req.body);
@@ -166,8 +166,7 @@ app.get('/api/read/foods', (req, res) => {
       }
     })();
 });
-=======
->>>>>>> 02876bedec82d0cfbb7dc02a71f8212ecd961c3f
+
 
 // --- UPDATE ---
 // Update Employee.
