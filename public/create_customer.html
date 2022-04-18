@@ -77,31 +77,7 @@ li a:hover {
 
 <body>
 
-  <script>
-    function checkStrength(){
-      const password = document.getElementById("signupform").elements["password"].value;
-      if(password.length >= 8){
-        document.getElementById("signupform").elements["password"].style.backgroundColor = 'chartreuse';
-      }
-      else{
-        document.getElementById("signupform").elements["password"].style.backgroundColor = 'white';
-      }
-    }
-  </script>
-
-  <script>
-    function checkEqual(){
-      const password = document.getElementById("signupform").elements["password"].value;
-      const passwordconfirm = document.getElementById("signupform").elements["confPwd"].value;
-      if(password === passwordconfirm){
-        document.getElementById("signupform").elements["confPwd"].style.backgroundColor = 'chartreuse';
-      }
-      else
-      {
-        document.getElementById("signupform").elements["confPwd"].style.backgroundColor = 'red';
-      }
-    }
-  </script>
+  <script src="create_customer.js"></script>
 
   <div id="bannerimage">
     <h1 id="herotext">Food2Go</h1>
@@ -121,11 +97,11 @@ li a:hover {
   </div>
 
   <div>
-  <form id="signupform" method="post" action="http://food2go.com/registration">
+  <form id="signupform" method="post" action="#">
   <fieldset>
    <legend>Create New Account</legend>
     <p>
-    <label>Name: <input type="name" id="name"
+    <label>Name: <input type="text" id="name"
      placeholder="Enter your name to be used in the service" /></label>
    </p>  
    <p>
@@ -152,7 +128,7 @@ li a:hover {
   </fieldset>
   <p>
   <input type="reset" value="Reset" /> &nbsp;&nbsp;
-  <input type="submit" id="registerSubmit" value="Create Account"/>
+  <button onclick="submitPressed()">Create Account </button>
   </p>
  </form>
  </div>
