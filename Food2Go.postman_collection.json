@@ -90,7 +90,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"testCustomer\",\n\t\"password\": \"123Password\",\n\t\"email\": \"first_customer@test.com\",\n\t\"name\": \"Test Customer\",\n\t\"phone\": \"832-265-1258\",\n\}"
+					"raw": "{\n\t\"username\": \"testCustomer\",\n\t\"password\": \"123Password\",\n\t\"email\": \"first_customer@test.com\",\n\t\"name\": \"Test Customer\",\n\t\"phone\": \"832-265-1258\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:{{port}}/{{project-id}}/{{zone}}/app/api/create/employees",

@@ -1,0 +1,23 @@
+{
+  "name": "firebase",
+  "version": "1.0.0",
+  "description": "Food2Go Web App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greg300/ECE568_Team4.git"
+  },
+  "author": "Team 4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greg300/ECE568_Team4/issues"
+  },
+  "homepage": "https://github.com/greg300/ECE568_Team4#readme",
+  "devDependencies": {
+    "firebase": "^9.6.11",
+    "request": "^2.88.2"
+  }
+}
