@@ -18,7 +18,7 @@ This repository includes code to represent a takeout & delivery management syste
 
 ## How to Run
 ### Backend
-1. Install Node.js (if not installed already) and Firebase CLI (`npm install -g firebase-tools`).
+1. Install latest stable release of Node.js (if not installed already) and Firebase CLI (`npm install -g firebase-tools`).
 
 2. To deploy locally, run `npm run serve` from within "functions".
 
