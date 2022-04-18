@@ -28,6 +28,11 @@ function checkStrength(){
     const username = document.getElementById("signupform").elements["username"].value;
     const password = document.getElementById("signupform").elements["password"].value;
 
+    if(username === "" || email === "" || phone === "" || name === "" || password === ""){
+      alert("One or more fields are not populated.");
+      return
+    }
+
     const body = "username=" + username + "&password=" + password + "&email=" + email + "&name=" + name + "&phone=" + phone;
 
     fetch("http://localhost:5001/food2go-56aac/us-central1/app/api/create/customers", {
