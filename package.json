@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/greg300/ECE568_Team4#readme",
   "devDependencies": {
+    "fetch": "^1.1.0",
     "firebase": "^9.6.11",
     "request": "^2.88.2"
   }

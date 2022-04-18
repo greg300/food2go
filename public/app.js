@@ -1,16 +1,14 @@
-const dbRef = firebase.database().ref();
-const foodsRef = dbRef.child('foods');
 
 const foodListUI = document.getElementById("foodList");
 
-foodsRef.on("child_added", snap => {
-   let food = snap.val();
-   let $li = document.createElement("li");
-   $li.innerHTML = food.name;
-   $li.setAttribute("child-key", snap.key); 
-   $li.addEventListener("click", userClicked)
-   foodListUI.append($li);
-});
+// foodsRef.on("child_added", snap => {
+//    let food = snap.val();
+//    let $li = document.createElement("li");
+//    $li.innerHTML = food.name;
+//    $li.setAttribute("child-key", snap.key); 
+//    $li.addEventListener("click", userClicked)
+//    foodListUI.append($li);
+// });
 
 function userClicked(e) {
 
@@ -28,3 +26,20 @@ function userClicked(e) {
     });
   
 }
+
+function readFoods () {
+  fetch('http://localhost:5001/food2go-56aac/us-central1/app/api/read/foods').then(function (response) {
+    // The API call was successful!
+    console.log('123');
+    return response.json();
+  }).then(function (data) {
+    // This is the JSON from our response
+    console.log('456');
+    console.log(data);
+  }).catch(function (err) {
+    // There was an error
+    console.warn('Something went wrong.', err);
+  });
+}
+
+readFoods();
