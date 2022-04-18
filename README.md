@@ -27,6 +27,6 @@ This repository includes code to represent a takeout & delivery management syste
 4. View Firebase Realtime Database at https://console.firebase.google.com/project/food2go-56aac/database/food2go-56aac-default-rtdb/data (need to request access from one of the contributors).
 
 ### Frontend
-1. To view the menu contents and test the "Read All Food Items" (`/api/read/foods`) API, first follow the instructions in the above `Backend` section, then open `menu.html` in a browswer.
+1. To view the menu contents and test the "Read All Food Items" (`/api/read/foods`) API, first follow the instructions in the above `Backend` section, then open `public/menu.html` in a browswer.
 
-2. To register a new customer and test the "Create New Customer" (`/api/create/customers`) API, follow the instructions in `Backend`, then open `create_customer.html`.
+2. To register a new customer and test the "Create New Customer" (`/api/create/customers`) API, follow the instructions in `Backend`, then open `public/create_customer.html`.
