@@ -151,23 +151,6 @@ app.get('/api/read/foods', (req, res) => {
   });
 
 
-// Read all Food items.
-app.get('/api/read/foods', (req, res) => {
-  console.log(req.body);
-  (async () => {
-      try {
-          db.ref('foods/').once('value').then(function(snapshot) {
-              console.log(snapshot.val());
-              return res.status(200).send();
-          })
-      } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
-      }
-    })();
-});
-
-
 // --- UPDATE ---
 // Update Employee.
 app.patch('/api/update/employees/:employee_id', (req, res) => {
@@ -234,9 +217,73 @@ app.patch('/api/update/customers/:username', (req, res) => {
   });
 
 // Add Food Item into Cart.
+app.patch('/api/update/customers/:username/cart/add', (req, res) => {
+    var username = req.param("username");
+    var item_id = req.param("food_item_id");
+    console.log(username);    
+    console.log(item_id);
+    (async () => {
+        try{
+            db.ref('customers/' + username).once('value').then(function(snapshot){
+                if (!snapshot.hasChild('cart')){
+                    // If there is not yet a "cart" field existed for this customer
+                    snapshot.ref.update({
+                        cart:{
+                            [item_id]: 1
+                        }
+                    })
+                }
+                else{
+                    if (!snapshot.child('cart').hasChild(item_id)){
+                        // If the selected Food item is NOT in the cart
+                        snapshot.child('cart').ref.update({
+                            [item_id]: 1
+                        });
+                    }else{
+                        // If the selected Food item is in the cart
+                        snapshot.child('cart').ref.once('value').then(function(snapshot){
+                            count = snapshot.child(item_id).val() + 1;
+                            console.log(count);
+                            snapshot.ref.update({
+                                [item_id]: count
+                            })
+                        })
+                    }
+                }
+        });
+        return res.status(200).send();
+        } catch (error){
+            console.log(error);
+            return res.status(500).send(error);
+        }
+        })();
+    });
 
 // Remove Food Item from cart.
-
+app.patch('/api/update/customers/:username/cart/remove', (req, res) => {
+    var username = req.param("username");
+    var item_id = req.param("food_item_id");
+    console.log(username);    
+    console.log(item_id);
+    (async () => {
+        try{
+            db.ref('customers/' + username + '/cart').once('value').then(function(snapshot){
+                count = snapshot.child(item_id).val();
+                if (count > 1){
+                    snapshot.ref.update({
+                        [item_id]: count - 1
+                    })
+                }else{
+                    snapshot.ref.child(item_id).remove();
+                }
+            })
+        return res.status(200).send();
+        } catch (error){
+            console.log(error);
+            return res.status(500).send(error);
+        }
+        })();
+    });
 
 
 // --- DELETE ---
