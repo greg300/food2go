@@ -241,12 +241,9 @@ app.patch('/api/update/customers/:username/cart/add', (req, res) => {
                         });
                     }else{
                         // If the selected Food item is in the cart
-                        snapshot.child('cart').ref.once('value').then(function(snapshot){
-                            count = snapshot.child(item_id).val() + 1;
-                            console.log(count);
-                            snapshot.ref.update({
-                                [item_id]: count
-                            })
+                        count = snapshot.child('cart').child(item_id).val() + 1;
+                        snapshot.child('cart').ref.update({
+                            [item_id]: count
                         })
                     }
                 }
