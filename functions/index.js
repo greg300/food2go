@@ -150,6 +150,34 @@ app.get('/api/read/foods', (req, res) => {
       })();
   });
 
+// View Cart.
+/* Returns Map object(s) { food_item_id: count }. 
+   Example: { testFood01: 3, testFood02: 1, testFood03: 2 } */
+app.get('/api/customers/:username/cart/details', (req, res) => {
+    var username = req.param("username");
+    console.log(username);
+    (async () => {
+        try {
+            db.ref('customers/' + username).once('value').then(function(snapshot){
+                if (!snapshot.hasChild('cart')){
+                    // If there is not yet a "cart" field existed for this customer
+                    msg = "Your cart is empty."
+                    console.log(msg);
+                    return res.status(200).send();
+                }
+                else{
+                    cart = snapshot.child('cart').val();
+                    console.log(cart);
+                    return res.status(200).send(cart);
+                }
+        });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
 
 // --- UPDATE ---
 // Update Employee.
@@ -217,11 +245,14 @@ app.patch('/api/update/customers/:username', (req, res) => {
   });
 
 // Add Food Item into Cart.
+/* req.params: [username], [food_item_id], [count] */
 app.patch('/api/update/customers/:username/cart/add', (req, res) => {
     var username = req.param("username");
     var item_id = req.param("food_item_id");
+    var add_count = Number(req.param("count")); // Count input of the selected item.
     console.log(username);    
     console.log(item_id);
+    console.log(add_count);
     (async () => {
         try{
             db.ref('customers/' + username).once('value').then(function(snapshot){
@@ -229,7 +260,7 @@ app.patch('/api/update/customers/:username/cart/add', (req, res) => {
                     // If there is not yet a "cart" field existed for this customer
                     snapshot.ref.update({
                         cart:{
-                            [item_id]: 1
+                            [item_id]: add_count
                         }
                     })
                 }
@@ -237,13 +268,13 @@ app.patch('/api/update/customers/:username/cart/add', (req, res) => {
                     if (!snapshot.child('cart').hasChild(item_id)){
                         // If the selected Food item is NOT in the cart
                         snapshot.child('cart').ref.update({
-                            [item_id]: 1
+                            [item_id]: add_count
                         });
                     }else{
                         // If the selected Food item is in the cart
-                        count = snapshot.child('cart').child(item_id).val() + 1;
+                        new_count = snapshot.child('cart').child(item_id).val() + add_count;
                         snapshot.child('cart').ref.update({
-                            [item_id]: count
+                            [item_id]: new_count
                         })
                     }
                 }
@@ -256,7 +287,7 @@ app.patch('/api/update/customers/:username/cart/add', (req, res) => {
         })();
     });
 
-// Remove Food Item from cart.
+// Remove Food Item from cart (or decrement the mapped Count by 1).
 app.patch('/api/update/customers/:username/cart/remove', (req, res) => {
     var username = req.param("username");
     var item_id = req.param("food_item_id");

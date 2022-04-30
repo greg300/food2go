@@ -16,6 +16,8 @@ curl -d "food_item_id=testFoodItem02&name=Food02&description=Food Description 2&
 
 curl -X DELETE http://localhost:5001/food2go-56aac/us-central1/app/api/delete/foods/testFoodItem02
 
-curl -d "username=testCustomer2&food_item_id=testFood03" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer1/cart/add
+curl -d "username=testCustomer2&food_item_id=testFood03&count=1" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer2/cart/add
 
-curl -d "username=testCustomer2&food_item_id=testFood03" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer1/cart/remove
+curl -d "username=testCustomer2&food_item_id=testFood03" -X PATCH  http://localhost:5001/food2go-56aac/us-central1/app/api/update/customers/testCustomer2/cart/remove
+
+curl http://localhost:5001/food2go-56aac/us-central1/app/api/customers/testCustomer1/cart/details
