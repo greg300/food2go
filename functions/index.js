@@ -151,8 +151,38 @@ app.get('/api/read/foods', (req, res) => {
   });
 
 // View Cart.
-/* Returns Map object(s) { food_item_id: count }. 
-   Example: { testFood01: 3, testFood02: 1, testFood03: 2 } */
+/* Returns: Map object(s) { food_item_id => {count, details} }
+   Example: 
+    Map(3) {
+     'testFood01' => {
+      count: 3,
+      details: {
+        availability: true,
+        description: 'This is Food Item 01',
+        name: 'Test Food 01',
+        price: 6.3,
+        price_knock: 0
+      }
+    },
+    'testFood02' => {
+      count: 1,
+      details: {
+        availability: true,
+        description: 'This is Food Item 02',
+        name: 'Test Food 02',
+        price: 9
+      }
+    },
+    'testFood03' => {
+      count: 2,
+      details: {
+        availability: false,
+        description: 'This is Food Item 03',
+        name: 'Test Food 03',
+        price: 9
+      }
+    }
+  }*/
 app.get('/api/customers/:username/cart/details', (req, res) => {
     var username = req.param("username");
     console.log(username);
@@ -167,8 +197,19 @@ app.get('/api/customers/:username/cart/details', (req, res) => {
                 }
                 else{
                     cart = snapshot.child('cart').val();
-                    console.log(cart);
-                    return res.status(200).send(cart);
+                    map_id_to_count = new Map(Object.entries(cart))
+
+                    ids = Array.from(map_id_to_count.keys());
+                    for (let id of ids){
+                        db.ref('foods/' + id).once('value').then(function(snapshot){
+                            count = map_id_to_count.get(id);
+                            details = snapshot.val();
+                            map_id_to_count.set(id, {count, details})
+                            console.log(map_id_to_count);
+                        })
+                    }
+                    res.status(200).send(map_id_to_count);
+                    return;
                 }
         });
         } catch (error) {
