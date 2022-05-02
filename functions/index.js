@@ -150,6 +150,68 @@ app.get('/api/read/foods', (req, res) => {
       })();
   });
 
+//Check if Username Exists in DB.
+app.get('/api/read/customers/:username', (req, res) => {
+    var username = req.param("username");
+    console.log(username);
+    (async () => {
+        try {
+            db.ref('customers/' + username).once('value').then(function(snapshot){
+                    if(!snapshot.exists()){
+                        msg = "User does not exist";
+                        console.log(msg);
+                        return res.status(200).send();
+                    }
+                    else
+                    {
+                        msg = "Customer exists in db";
+                        console.log(msg);
+                        return res.status(201).send();
+                    }
+        });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
+//Verify login information for a customer in the database
+app.get('/api/login/customers', (req, res) => {
+    var username = req.param("username");
+    var password = req.param("password");
+    console.log(username);
+    console.log(password);
+    (async () => {
+        try {
+            db.ref('customers/' + username).once('value').then(function(snapshot) {
+                if(!snapshot.exists()){
+                        msg = "User does not exist";
+                        console.log(msg);
+                        return res.status(500).send();
+                    }
+                else
+                {
+                    //check the user's password to see if there is a match
+                    password_db = snapshot.child('password').val();
+
+                    if(password_db === password){
+                        console.log("Successful login of user");
+                        return res.status(200).send();
+                    }
+                    else{
+                        console.log("Entered password does not match stored password");
+                        return res.status(500).send();
+                    }
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      })();
+  });
+
 // View Cart.
 /* Returns: Map object(s) { food_item_id => {count, details} }
    Example: 

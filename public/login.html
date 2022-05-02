@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Food2Go - Customer Registration</title>
+  <title>Food2Go - Login</title>
   <style>
 ul {
   list-style-type: none;
@@ -63,12 +63,12 @@ li a:hover {
    padding-left: 2px;
 }
 
-#registrationtext{
+#logintext{
   font-family: "Garamond";
   font-style: italic;
 }
 
-#signupform{
+#loginform{
   font-family: "Garamond";
 }
 
@@ -77,7 +77,7 @@ li a:hover {
 
 <body>
 
-  <script src="create_customer.js"></script>
+  <script src="login.js"></script>
 
   <div id="bannerimage">
     <h1 id="herotext">Food2Go</h1>
@@ -93,42 +93,25 @@ li a:hover {
   </div>
 
   <div>
-  <h1 id="registrationtext"> Customer Registration </h1>
+  <h1 id="logintext"> Log in to your Account </h1>
   </div>
 
   <div>
-  <form id="signupform" method="post" action="#" onreset="resetFields()">
+  <form id="loginform" method="post" action="#" onreset="resetFields()">
   <fieldset>
-   <legend>Create New Account</legend>
-    <p>
-    <label>Name: <input type="text" id="name"
-     placeholder="Enter your name to be used in the service" /></label>
-   </p>  
+   <legend>Login</legend>
    <p>
-    <label>Email Address: <input type="email" id="email"
-     placeholder="An email will be sent to this address requiring you
-     to confirm its receipt to activate your account" /></label>
+    <label>Username: <input type="text" id="username" 
+     placeholder="Enter your username" /></label>
    </p>
    <p>
-    <label>Phone Number: <input type="phoneNumber" id="phone"
-     placeholder="Phone number to be associated with the account" /></label>
-   </p>
-   <p>
-    <label>Username: <input type="text" id="username" onblur="checkUsernameExistence()" 
-     placeholder="Username must include only letters or numbers" /></label>
-   </p>
-   <p>
-    <label>Password: <input type="password" id="password" onblur="checkStrength()"
-     placeholder="Password must be at least 8 characters long" /></label>
-   </p>
-   <p>
-    <label>Confirm Password: <input type="password" name="confPwd" onblur="checkEqual()" /></label>
+    <label>Password: <input type="password" id="password"
+     placeholder="Enter your password" /></label>
    </p>
    <p>
   </fieldset>
   <p>
-  <input type="reset" value="Reset" /> &nbsp;&nbsp;
-  <button onclick="submitPressed()">Create Account </button>
+  <button onclick="submitPressed()">Login </button>
   </p>
  </form>
  </div>
