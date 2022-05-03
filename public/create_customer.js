@@ -26,29 +26,32 @@ function checkStrength(){
     }
   }
 
-  function checkUsernameExistence()
+ async function checkUsernameExistence()
   {
-    const username = document.getElementById("signupform").elements["username"].value;
-    if(username.length == 0){ return; }
-    fetch("http://localhost:5001/food2go-56aac/us-central1/app/api/read/customers/"+username, {
+    console.log("calling checkusername");
+    document.getElementById("signupform").addEventListener("click", function(event){
+    event.preventDefault()
+    });
+    const username = "username=" + document.getElementById("signupform").elements["username"].value;
+    if(username.length == 0){ return 0; }
+    return fetch("http://localhost:5001/food2go-56aac/us-central1/app/api/read/customers/", {
+      body: username,
       headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        method: "GET"
+        method: "POST"
       }).then(function (response) {
     // The API call was successful!
-    if(response.status == 200){
-      console.log("New username")
-      document.getElementById("signupform").elements["username"].style.backgroundColor = 'white';
+    return response.status;
+  }).then(function (data) {
+    if(data == 200){
+      console.log("New username");
       return 1;
     }
     else{
-      console.log("Username already exists")
-      document.getElementById("signupform").elements["username"].style.backgroundColor = 'red';
-      return 0;
+     console.log("Username exists in db");
+     return 0;
     }
-    return response;
-  }).then(function (data) {
     // This is the JSON from our response
     
   }).catch(function (err) {
@@ -66,7 +69,11 @@ function checkStrength(){
     document.getElementById("signupform").elements["confPwd"].style.backgroundColor = 'white';
   }
 
-  function submitPressed() {
+  async function submitPressed() {
+    result = await checkUsernameExistence();
+    document.getElementById("signupform").addEventListener("click", function(event){
+    event.preventDefault()
+    });
     const name = document.getElementById("signupform").elements["name"].value;
     const email = document.getElementById("signupform").elements["email"].value;
     const phone = document.getElementById("signupform").elements["phone"].value;
@@ -78,6 +85,11 @@ function checkStrength(){
       return
     }
 
+    if(result == 0){
+      alert("Account with this username already exists. Please choose a different username.");
+      return
+    }
+
     if(checkStrength() == 0){
       alert("Password is not strong enough. Please enter a password with 8 or more characters.");
       return
@@ -85,11 +97,6 @@ function checkStrength(){
 
     if(checkEqual() == 0){
       alert("Password and Password Confirmation do not match.");
-      return
-    }
-
-    if(checkUsernameExistence() == 0){
-      alert("Account with this username already exists. Please choose a different username.");
       return
     }
 

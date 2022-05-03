@@ -151,12 +151,12 @@ app.get('/api/read/foods', (req, res) => {
   });
 
 //Check if Username Exists in DB.
-app.get('/api/read/customers/:username', (req, res) => {
-    var username = req.param("username");
-    console.log(username);
+app.post('/api/read/customers', (req, res) => {
+    console.log(req.body);
+    console.log(req.body['username']);
     (async () => {
         try {
-            db.ref('customers/' + username).once('value').then(function(snapshot){
+            db.ref('customers/' + req.body['username']).once('value').then(function(snapshot){
                     if(!snapshot.exists()){
                         msg = "User does not exist";
                         console.log(msg);
@@ -166,7 +166,7 @@ app.get('/api/read/customers/:username', (req, res) => {
                     {
                         msg = "Customer exists in db";
                         console.log(msg);
-                        return res.status(201).send();
+                        return res.status(500).send();
                     }
         });
         } catch (error) {
@@ -177,14 +177,13 @@ app.get('/api/read/customers/:username', (req, res) => {
   });
 
 //Verify login information for a customer in the database
-app.get('/api/login/customers', (req, res) => {
-    var username = req.param("username");
-    var password = req.param("password");
-    console.log(username);
-    console.log(password);
+app.post('/api/login/customers', (req, res) => {
+    console.log(req.body);
+    console.log(req.body['username']);
+    console.log(req.body['password']);
     (async () => {
         try {
-            db.ref('customers/' + username).once('value').then(function(snapshot) {
+            db.ref('customers/' + req.body['username']).once('value').then(function(snapshot) {
                 if(!snapshot.exists()){
                         msg = "User does not exist";
                         console.log(msg);
@@ -195,7 +194,9 @@ app.get('/api/login/customers', (req, res) => {
                     //check the user's password to see if there is a match
                     password_db = snapshot.child('password').val();
 
-                    if(password_db === password){
+                    console.log(password_db);
+
+                    if(password_db === req.body['password']){
                         console.log("Successful login of user");
                         return res.status(200).send();
                     }
