@@ -1,5 +1,7 @@
-# ECE568_Team4
-Software Engineering of Web Applications Team Project.
+# Food2Go
+## ECE 568 - Software Engineering of Web Applications
+
+This repository includes code to represent a takeout & delivery management system for a restaurant, built with Google Firebase and Node.js.
 
 ## Team Members:
 
@@ -11,12 +13,7 @@ Nicholas Meegan – <nicholas.meegan@rutgers.edu>
 
 Yue Wang – <yw450@scarletmail.rutgers.edu>
 
----
-
-## About
-This repository includes code to represent a takeout & delivery management system for a restaurant, built with Google Firebase and Node.js.
-
-## How to Run
+## Usage
 ### Backend
 1. Install latest stable release of Node.js (if not installed already) and Firebase CLI (`npm install -g firebase-tools`).
 
